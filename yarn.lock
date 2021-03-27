@@ -676,9 +676,19 @@ ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-ajv@^7.0.1, ajv@^7.0.2:
+ajv@^7.0.2:
   version "7.2.3"
   resolved "https://registry.npm.taobao.org/ajv/download/ajv-7.2.3.tgz?cache=0&sync_timestamp=1616223774029&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fajv%2Fdownload%2Fajv-7.2.3.tgz#ca78d1cf458d7d36d1c3fa0794dd143406db5772"
+  integrity sha1-ynjRz0WNfTbRw/oHlN0UNAbbV3I=
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
+    uri-js "^4.2.2"
+
+ajv@^7.2.3:
+  version "7.2.3"
+  resolved "https://registry.npm.taobao.org/ajv/download/ajv-7.2.3.tgz?cache=0&sync_timestamp=1616485150168&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fajv%2Fdownload%2Fajv-7.2.3.tgz#ca78d1cf458d7d36d1c3fa0794dd143406db5772"
   integrity sha1-ynjRz0WNfTbRw/oHlN0UNAbbV3I=
   dependencies:
     fast-deep-equal "^3.1.1"

@@ -2,7 +2,7 @@
  * @Author: ADI
  * @Date: 2021-03-27 11:03:01
  * @LastEditors: ADI
- * @LastEditTime: 2021-03-27 12:01:46
+ * @LastEditTime: 2021-03-27 12:18:30
  */
 const { SuccessModel, ErrorModel } = require("../model/ResModel");
 const {
@@ -11,7 +11,7 @@ const {
   registerFailInfo,
 } = require("../model/ErrorInfo");
 const { getUserInfo, createUser } = require("../services/user");
-
+const { doCrypto } = require("../utils/cryp");
 /**
  * @author: ADI
  * @Date: 2021-03-27 11:52:14
@@ -40,6 +40,7 @@ async function register({ userName, password, gender }) {
   if (userInfo) {
     return new ErrorModel(registerUserNameExistInfo);
   }
+  password = doCrypto(password);
   // 注册
   try {
     await createUser({ userName, password, gender });

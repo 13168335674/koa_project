@@ -2,13 +2,13 @@
  * @Author: ADI
  * @Date: 2021-03-21 09:27:01
  * @LastEditors: ADI
- * @LastEditTime: 2021-03-21 09:27:01
+ * @LastEditTime: 2021-03-27 12:07:16
  */
 const crypto = require("crypto");
 const { CRYPTO_SECRET_KEY } = require("../config/secretKeys");
 
 /**
- * @author: 小康
+ * @Author: ADI
  * @url: https://xiaokang.me
  * @param {String} content 要加密的明文
  * @description: MD5加密
@@ -19,7 +19,7 @@ function _md5(content) {
 }
 
 /**
- * @author: 小康
+ * @Author: ADI
  * @url: https://xiaokang.me
  * @param {*} content 明文
  * @description: 加密方法
@@ -30,5 +30,5 @@ function doCrypto(content) {
 }
 
 module.exports = {
-  doCrypto
+  doCrypto,
 };

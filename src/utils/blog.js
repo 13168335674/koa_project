@@ -14,7 +14,7 @@ const BLOG_LIST_TPL = fs
   .toString();
 
 /**
- * @author: 小康
+ * @Author: ADI
  * @url: https://xiaokang.me
  * @param {Array} blogList 微博列表
  * @param {Boolean} canReply 是否可以回复
@@ -23,7 +23,7 @@ const BLOG_LIST_TPL = fs
 function getBlogListStr(blogList = [], canReply = false) {
   return ejs.render(BLOG_LIST_TPL, {
     blogList,
-    canReply
+    canReply,
   });
 }
 

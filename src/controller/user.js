@@ -2,13 +2,14 @@
  * @Author: ADI
  * @Date: 2021-03-27 11:03:01
  * @LastEditors: ADI
- * @LastEditTime: 2021-03-27 12:18:30
+ * @LastEditTime: 2021-03-28 11:00:34
  */
 const { SuccessModel, ErrorModel } = require("../model/ResModel");
 const {
   registerUserNameNotExistInfo,
   registerUserNameExistInfo,
   registerFailInfo,
+  loginFailInfo,
 } = require("../model/ErrorInfo");
 const { getUserInfo, createUser } = require("../services/user");
 const { doCrypto } = require("../utils/cryp");
@@ -51,7 +52,27 @@ async function register({ userName, password, gender }) {
   }
 }
 
+/**
+ * @author: ADI
+ * @Date: 2021-03-28 10:37:09
+ * @param {*} ctx
+ * @param {*} userName
+ * @param {*} password
+ * @return {*}
+ */
+async function login({ ctx, userName, password }) {
+  const userInfo = await getUserInfo(userName, doCrypto(password));
+  if (!userInfo) {
+    return new ErrorModel(loginFailInfo);
+  }
+  if (ctx.session.userInfo == null) {
+    ctx.session.userInfo = userInfo;
+  }
+  return new SuccessModel();
+}
+
 module.exports = {
   isExist,
   register,
+  login,
 };

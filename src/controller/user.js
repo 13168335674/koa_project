@@ -2,7 +2,7 @@
  * @Author: ADI
  * @Date: 2021-03-27 11:03:01
  * @LastEditors: ADI
- * @LastEditTime: 2021-03-28 11:00:34
+ * @LastEditTime: 2021-03-28 12:02:26
  */
 const { SuccessModel, ErrorModel } = require("../model/ResModel");
 const {
@@ -10,9 +10,11 @@ const {
   registerUserNameExistInfo,
   registerFailInfo,
   loginFailInfo,
+  deleteUserFailInfo,
 } = require("../model/ErrorInfo");
-const { getUserInfo, createUser } = require("../services/user");
+const { getUserInfo, createUser, deleteUser } = require("../services/user");
 const { doCrypto } = require("../utils/cryp");
+const { User } = require("../db/model");
 /**
  * @author: ADI
  * @Date: 2021-03-27 11:52:14
@@ -71,8 +73,17 @@ async function login({ ctx, userName, password }) {
   return new SuccessModel();
 }
 
+async function deleteCurUser(userName) {
+  const result = await deleteUser(userName);
+  if (result) {
+    return new SuccessModel();
+  }
+  return new ErrorModel(deleteUserFailInfo);
+}
+
 module.exports = {
   isExist,
   register,
   login,
+  deleteCurUser,
 };

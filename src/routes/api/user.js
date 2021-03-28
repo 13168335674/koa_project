@@ -2,12 +2,19 @@
  * @Author: ADI
  * @Date: 2021-03-27 10:58:46
  * @LastEditors: ADI
- * @LastEditTime: 2021-03-28 10:55:51
+ * @LastEditTime: 2021-03-28 12:03:59
  */
 const router = require("koa-router")();
-const { isExist, register, login } = require("../../controller/user");
+const {
+  isExist,
+  register,
+  login,
+  deleteCurUser,
+} = require("../../controller/user");
 const { getValidator } = require("../../middlewares/validator");
 const userValidate = require("../../validator/user");
+const { isTest } = require("../../utils/env");
+const { loginCheck } = require("../../middlewares/loginChecks");
 
 router.prefix("/api/user");
 
@@ -28,6 +35,13 @@ router.post("/login", async (ctx, next) => {
     userName,
     password,
   });
+});
+
+router.post("/delete", loginCheck, async (ctx, next) => {
+  if (isTest) {
+    const { userName } = ctx.session.userInfo;
+    ctx.body = await deleteCurUser(userName);
+  }
 });
 
 module.exports = router;

@@ -6,11 +6,11 @@ const { loginRedirect } = require("../middlewares/loginChecks");
 //   });
 // });
 
-router.get("/string", loginRedirect, async (ctx, next) => {
+router.get("/string", async (ctx, next) => {
   ctx.body = "koa2 string";
 });
 
-router.get("/json", loginRedirect, async (ctx, next) => {
+router.get("/json", async (ctx, next) => {
   // const { session } = ctx;
   // if (session.num === null) {
   //   session.num = 0;

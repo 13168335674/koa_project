@@ -1,8 +1,8 @@
 /*
  * @Author: ADI
  * @Date: 2021-03-28 11:12:40
- * @LastEditors: ADI
- * @LastEditTime: 2021-03-28 11:20:28
+ * @LastEditors  : ADI
+ * @LastEditTime : 2021-04-03 10:50:50
  */
 const { ErrorModel } = require("../model/ResModel");
 const { loginCheckFailInfo } = require("../model/ErrorInfo");
@@ -28,7 +28,7 @@ async function loginRedirect(ctx, next) {
     return;
   }
   const curUrl = ctx.url;
-  ctx.redirect("/login?url" + encodeURIComponent(curUrl));
+  ctx.redirect("/login?url=" + encodeURIComponent(curUrl));
 }
 
 module.exports = {

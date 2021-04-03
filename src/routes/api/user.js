@@ -2,7 +2,7 @@
  * @Author: ADI
  * @Date: 2021-03-27 10:58:46
  * @LastEditors  : ADI
- * @LastEditTime : 2021-04-01 20:43:30
+ * @LastEditTime : 2021-04-03 10:37:36
  */
 const router = require("koa-router")();
 const {
@@ -11,6 +11,7 @@ const {
   login,
   deleteCurUser,
   changeInfo,
+  changePassword,
 } = require("../../controller/user");
 const { getValidator } = require("../../middlewares/validator");
 const userValidate = require("../../validator/user");
@@ -45,6 +46,7 @@ router.post("/delete", loginCheck, async (ctx, next) => {
   }
 });
 
+// 修改用户信息
 router.patch(
   "/changeInfo",
   loginCheck,
@@ -54,4 +56,19 @@ router.patch(
     ctx.body = await changeInfo(ctx, { nickName, city, picture });
   }
 );
+
+// 修改密码
+router.patch(
+  "/changePassword",
+  loginCheck,
+  getValidator(userValidate),
+  async (ctx, next) => {
+    const { password, newPassword } = ctx.request.body;
+    const { userName } = ctx.session.userInfo;
+    ctx.body = await changePassword(userName, password, newPassword);
+  }
+);
+
+//
+
 module.exports = router;

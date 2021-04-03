@@ -2,7 +2,7 @@
  * @Author       : ADI
  * @Date         : 2021-03-18 20:23:27
  * @LastEditors  : ADI
- * @LastEditTime : 2021-03-31 21:09:39
+ * @LastEditTime : 2021-04-03 11:28:45
  */
 const Koa = require("koa");
 const app = new Koa();
@@ -18,11 +18,11 @@ const { SESSION_SECRET_KEY } = require("./config/secretKeys");
 const session = require("koa-generic-session");
 const redisStore = require("koa-redis");
 
-const index = require("./routes/index");
-
 const userViewRouter = require("./routes/view/user");
-const userAPIRouter = require("./routes/api/user");
+const blogViewRouter = require("./routes/view/blog");
 const errorViewRouter = require("./routes/view/error");
+
+const userAPIRouter = require("./routes/api/user");
 const utilsAPIRouter = require("./routes/api/utils");
 
 const koaStatic = require("koa-static");
@@ -82,12 +82,11 @@ app.use(async (ctx, next) => {
 });
 
 // routes
-app.use(index.routes(), index.allowedMethods());
-
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods());
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods());
 
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods());
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods());
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods());
 
 // error-handling

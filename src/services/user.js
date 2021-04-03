@@ -1,8 +1,8 @@
 /*
  * @Author: ADI
  * @Date: 2021-03-27 11:04:50
- * @LastEditors: ADI
- * @LastEditTime: 2021-03-28 12:00:56
+ * @LastEditors  : ADI
+ * @LastEditTime : 2021-04-01 20:47:31
  */
 const { User } = require("../db/model/index");
 const { formatUser } = require("./_format");
@@ -69,8 +69,35 @@ async function deleteUser(userName) {
   return result > 0;
 }
 
+async function updateUser(
+  { newPassword, newNickName, newPicture, newCity },
+  { userName, password }
+) {
+  const updateData = {};
+  if (newPassword) {
+    updateData.password = newPassword;
+  }
+  if (newNickName) {
+    updateData.nickName = newNickName;
+  }
+  if (newPicture) {
+    updateData.picture = newPicture;
+  }
+  if (newCity) {
+    updateData.city = newCity;
+  }
+  const whereData = {
+    userName,
+  };
+  const result = await User.update(updateData, {
+    where: whereData,
+  });
+  return result[0] > 0;
+}
+
 module.exports = {
   getUserInfo,
   createUser,
   deleteUser,
+  updateUser,
 };

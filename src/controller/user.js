@@ -1,8 +1,8 @@
 /*
  * @Author: ADI
  * @Date: 2021-03-27 11:03:01
- * @LastEditors: ADI
- * @LastEditTime: 2021-03-28 12:02:26
+ * @LastEditors  : ADI
+ * @LastEditTime : 2021-04-01 20:42:50
  */
 const { SuccessModel, ErrorModel } = require("../model/ResModel");
 const {
@@ -11,8 +11,14 @@ const {
   registerFailInfo,
   loginFailInfo,
   deleteUserFailInfo,
+  changeInfoFailInfo,
 } = require("../model/ErrorInfo");
-const { getUserInfo, createUser, deleteUser } = require("../services/user");
+const {
+  getUserInfo,
+  createUser,
+  deleteUser,
+  updateUser,
+} = require("../services/user");
 const { doCrypto } = require("../utils/cryp");
 const { User } = require("../db/model");
 /**
@@ -81,9 +87,36 @@ async function deleteCurUser(userName) {
   return new ErrorModel(deleteUserFailInfo);
 }
 
+async function changeInfo(ctx, { nickName, city, picture }) {
+  const { userName } = ctx.session.userInfo;
+  if (!nickName) {
+    nickName = userName;
+  }
+  const result = await updateUser(
+    {
+      newNickName: nickName,
+      newCity: city,
+      newPicture: picture,
+    },
+    {
+      userName,
+    }
+  );
+  if (result) {
+    Object.assign(ctx.session.userInfo, {
+      nickName,
+      city,
+      picture,
+    });
+    return new SuccessModel();
+  }
+  return new ErrorModel(changeInfoFailInfo);
+}
+
 module.exports = {
   isExist,
   register,
   login,
   deleteCurUser,
+  changeInfo,
 };

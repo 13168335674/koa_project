@@ -1,8 +1,8 @@
 /*
  * @Author: ADI
  * @Date: 2021-03-27 10:58:46
- * @LastEditors: ADI
- * @LastEditTime: 2021-03-28 12:03:59
+ * @LastEditors  : ADI
+ * @LastEditTime : 2021-04-01 20:43:30
  */
 const router = require("koa-router")();
 const {
@@ -10,6 +10,7 @@ const {
   register,
   login,
   deleteCurUser,
+  changeInfo,
 } = require("../../controller/user");
 const { getValidator } = require("../../middlewares/validator");
 const userValidate = require("../../validator/user");
@@ -44,4 +45,13 @@ router.post("/delete", loginCheck, async (ctx, next) => {
   }
 });
 
+router.patch(
+  "/changeInfo",
+  loginCheck,
+  getValidator(userValidate),
+  async (ctx, next) => {
+    const { nickName, city, picture } = ctx.request.body;
+    ctx.body = await changeInfo(ctx, { nickName, city, picture });
+  }
+);
 module.exports = router;

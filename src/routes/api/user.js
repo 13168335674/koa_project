@@ -2,7 +2,7 @@
  * @Author: ADI
  * @Date: 2021-03-27 10:58:46
  * @LastEditors  : ADI
- * @LastEditTime : 2021-04-03 10:37:36
+ * @LastEditTime : 2021-04-03 10:44:48
  */
 const router = require("koa-router")();
 const {
@@ -12,6 +12,7 @@ const {
   deleteCurUser,
   changeInfo,
   changePassword,
+  logout,
 } = require("../../controller/user");
 const { getValidator } = require("../../middlewares/validator");
 const userValidate = require("../../validator/user");
@@ -69,6 +70,9 @@ router.patch(
   }
 );
 
-//
+// 退出登录
+router.post("/logout", loginCheck, async (ctx, next) => {
+  ctx.body = await logout(ctx);
+});
 
 module.exports = router;

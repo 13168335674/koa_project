@@ -2,7 +2,7 @@
  * @Author: ADI
  * @Date: 2021-03-27 11:03:01
  * @LastEditors  : ADI
- * @LastEditTime : 2021-04-01 20:42:50
+ * @LastEditTime : 2021-04-03 10:42:36
  */
 const { SuccessModel, ErrorModel } = require("../model/ResModel");
 const {
@@ -12,6 +12,7 @@ const {
   loginFailInfo,
   deleteUserFailInfo,
   changeInfoFailInfo,
+  changePasswordFailInfo,
 } = require("../model/ErrorInfo");
 const {
   getUserInfo,
@@ -113,10 +114,33 @@ async function changeInfo(ctx, { nickName, city, picture }) {
   return new ErrorModel(changeInfoFailInfo);
 }
 
+async function changePassword(userName, password, newPassword) {
+  const result = await updateUser(
+    {
+      newPassword: doCrypto(newPassword),
+    },
+    {
+      userName,
+      password: doCrypto(password),
+    }
+  );
+  if (result) {
+    return new SuccessModel();
+  }
+  return new ErrorModel(changePasswordFailInfo);
+}
+
+async function logout(ctx) {
+  delete ctx.session.userInfo;
+  return new SuccessModel();
+}
+
 module.exports = {
   isExist,
   register,
   login,
   deleteCurUser,
   changeInfo,
+  changePassword,
+  logout,
 };

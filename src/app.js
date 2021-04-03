@@ -24,6 +24,7 @@ const errorViewRouter = require("./routes/view/error");
 
 const userAPIRouter = require("./routes/api/user");
 const utilsAPIRouter = require("./routes/api/utils");
+const blogHomeAPIRouter = require("./routes/api/blog-home");
 
 const koaStatic = require("koa-static");
 
@@ -83,6 +84,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods());
+app.use(blogHomeAPIRouter.routes(), blogHomeAPIRouter.allowedMethods());
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods());
 
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods());

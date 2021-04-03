@@ -1,17 +1,17 @@
 /*
  * @Author: ADI
  * @Date: 2021-03-21 09:25:25
- * @LastEditors: ADI
- * @LastEditTime: 2021-03-27 10:49:26
+ * @LastEditors  : ADI
+ * @LastEditTime : 2021-04-03 11:19:11
  */
 const User = require("./User");
-// const Blog = require("./Blog");
+const Blog = require("./Blog");
 // const UserRelation = require("./UserRelation");
 // const AtRelation = require("./AtRelation");
 // 创建外键
-// Blog.belongsTo(User, {
-//   foreignKey: "userId"
-// });
+Blog.belongsTo(User, {
+  foreignKey: "userId",
+});
 
 // UserRelation.belongsTo(User, {
 //   foreignKey: "followerId"
@@ -31,7 +31,7 @@ const User = require("./User");
 
 module.exports = {
   User,
-  // Blog,
+  Blog,
   // UserRelation,
   // AtRelation
 };

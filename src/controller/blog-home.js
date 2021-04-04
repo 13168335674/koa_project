@@ -2,8 +2,9 @@
  * @Author       : ADI
  * @Date         : 2021-04-03 12:06:22
  * @LastEditors  : ADI
- * @LastEditTime : 2021-04-03 12:29:31
+ * @LastEditTime : 2021-04-04 10:23:49
  */
+const xss = require("xss");
 const { SuccessModel, ErrorModel } = require("../model/ResModel");
 const { createBlogFailInfo } = require("../model/ErrorInfo");
 const { createBlog } = require("../services/blog");
@@ -15,7 +16,7 @@ async function create({ userId, content, image }) {
   try {
     const blog = await createBlog({
       userId,
-      content,
+      content: xss(content),
       image,
     });
     return new SuccessModel(blog);

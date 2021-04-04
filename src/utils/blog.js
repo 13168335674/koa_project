@@ -1,8 +1,8 @@
 /*
  * @Author: ADI
  * @Date: 2021-03-21 09:27:28
- * @LastEditors: ADI
- * @LastEditTime: 2021-03-21 09:27:28
+ * @LastEditors  : ADI
+ * @LastEditTime : 2021-04-04 11:55:12
  */
 const fs = require("fs");
 const path = require("path");
@@ -15,7 +15,6 @@ const BLOG_LIST_TPL = fs
 
 /**
  * @Author: ADI
- * @url: https://xiaokang.me
  * @param {Array} blogList 微博列表
  * @param {Boolean} canReply 是否可以回复
  * @description: 根据blogList渲染出HTML字符串

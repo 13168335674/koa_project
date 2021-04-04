@@ -2,7 +2,7 @@
  * @Author       : ADI
  * @Date         : 2021-03-18 20:23:27
  * @LastEditors  : ADI
- * @LastEditTime : 2021-04-03 11:28:45
+ * @LastEditTime : 2021-04-04 11:52:12
  */
 const Koa = require("koa");
 const app = new Koa();
@@ -25,6 +25,7 @@ const errorViewRouter = require("./routes/view/error");
 const userAPIRouter = require("./routes/api/user");
 const utilsAPIRouter = require("./routes/api/utils");
 const blogHomeAPIRouter = require("./routes/api/blog-home");
+const profileAPIRouter = require("./routes/api/blog-profile");
 
 const koaStatic = require("koa-static");
 
@@ -86,6 +87,7 @@ app.use(async (ctx, next) => {
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods());
 app.use(blogHomeAPIRouter.routes(), blogHomeAPIRouter.allowedMethods());
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods());
+app.use(profileAPIRouter.routes(), profileAPIRouter.allowedMethods());
 
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods());
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods());

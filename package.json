@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "ajv": "^7.2.3",
-    "date-fns": "^2.16.1",
+    "date-fns": "^2.19.0",
     "debug": "^4.1.1",
-    "ejs": "^3.1.5",
+    "ejs": "^3.1.6",
     "formidable-upload-koa": "^1.0.1",
     "fs-extra": "^9.1.0",
     "koa": "^2.7.0",
